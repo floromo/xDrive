@@ -76,11 +76,13 @@ void autonomous() {}
 void opcontrol() {
 	// Setting up hardware for robo
 
-	// Instantiating (making an instance (object) of) Motor
-	pros::Motor m_TopLeftMotor = pros::Motor (11);
-	pros::Motor m_TopRightMotor = pros::Motor (1);
-	pros::Motor m_BottomLeftMotor = pros::Motor (20);
-	pros::Motor m_BottomRightMotor = pros::Motor (10);
+	// // Instantiating (making an instance (object) of) Motor
+	// pros::Motor m_TopLeftMotor = pros::Motor (11);
+	// pros::Motor m_TopRightMotor = pros::Motor (1);
+	// pros::Motor m_BottomLeftMotor = pros::Motor (20);
+	// pros::Motor m_BottomRightMotor = pros::Motor (10);
+
+	Drivetrain m_drive = Drivetrain(11, 1, 20, 10);
 
 	// Instantiating controller
 	pros::Controller m_Controller = pros::Controller(pros::E_CONTROLLER_MASTER);
@@ -91,12 +93,13 @@ void opcontrol() {
 		int x_direction = m_Controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X);
 		int rotation = m_Controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
 
-		// Setting the velocities using maths
-		m_TopLeftMotor.move_velocity(y_direction + x_direction + rotation);
-		m_TopRightMotor.move_velocity(-y_direction + x_direction + rotation);
-		m_BottomLeftMotor.move_velocity(y_direction - x_direction + rotation);
-		m_BottomRightMotor.move_velocity(-y_direction - x_direction + rotation);
+		// // Setting the velocities using maths
+		// m_TopLeftMotor.move_velocity(y_direction + x_direction + rotation);
+		// m_TopRightMotor.move_velocity(-y_direction + x_direction + rotation);
+		// m_BottomLeftMotor.move_velocity(y_direction - x_direction + rotation);
+		// m_BottomRightMotor.move_velocity(-y_direction - x_direction + rotation);
 
+		m_drive.XDrive(y_direction, x_direction, rotation);
 
 		pros::delay(20); // Computer faster than robot, so gotta wait like 20 ms before updating so that the robo don't go kaboom
 	}
